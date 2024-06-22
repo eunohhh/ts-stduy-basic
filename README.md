@@ -133,19 +133,19 @@ processValue(42);
 
 #### ☑️ 사용 사례
 
-    ```tsx
-    interface Person {
-      name: string;
-      age: number;
-    }
+```tsx
+interface Person {
+    name: string;
+    age: number;
+}
 
-    const updatePerson = (person: Person, fields: Partial<Person>): Person => {
-      return { ...person, ...fields };
-    };
+const updatePerson = (person: Person, fields: Partial<Person>): Person => {
+    return { ...person, ...fields };
+};
 
-    const person: Person = { name: "Spartan", age: 30 };
-    const changedPerson = updatePerson(person, { age: 31 });
-    ```
+const person: Person = { name: "Spartan", age: 30 };
+const changedPerson = updatePerson(person, { age: 31 });
+```
 
     - 우선, Person이라는 인터페이스는 name, age라는 속성으로 구성이 되어있어요!
     - updatePerson 함수를 자세히 봐보세요. 2번째 인자로 `Partial<Person>` 타입의 fields를 받고 있어요.
@@ -166,13 +166,13 @@ processValue(42);
 
 #### ☑️ 사용 사례
 
-    ```tsx
-        interface Person {
-            name: string;
-            age: number;
-            address?: string; // 속성 명 뒤에 붙는 ?가 뭘까요
-        }
-    ```
+```tsx
+interface Person {
+    name: string;
+    age: number;
+    address?: string; // 속성 명 뒤에 붙는 ?가 뭘까요
+}
+```
 
     -   아까 봤던 Person이라는 인터페이스에 address라는 속성이 새로 생겼어요.
     -   그런데, address에 `?` 라는 문자가 붙었네요.
@@ -194,25 +194,25 @@ processValue(42);
 
 #### ☑️ 사용 사례
 
-    ```tsx
-        interface DatabaseConfig {
-            host: string;
-            readonly port: number; // 인터페이스에서도 readonly 타입 사용 가능해요!
-        }
+```tsx
+interface DatabaseConfig {
+    host: string;
+    readonly port: number; // 인터페이스에서도 readonly 타입 사용 가능해요!
+}
 
-        const mutableConfig: DatabaseConfig = {
-            host: "localhost",
-            port: 3306,
-        };
+const mutableConfig: DatabaseConfig = {
+    host: "localhost",
+    port: 3306,
+};
 
-        const immutableConfig: Readonly<DatabaseConfig> = {
-            host: "localhost",
-            port: 3306,
-        };
+const immutableConfig: Readonly<DatabaseConfig> = {
+    host: "localhost",
+    port: 3306,
+};
 
-        mutableConfig.host = "somewhere";
-        immutableConfig.host = "somewhere"; // 오류!
-    ```
+mutableConfig.host = "somewhere";
+immutableConfig.host = "somewhere"; // 오류!
+```
 
     -   DatabaseConfig는 불변 객체라고 할 수 없어요. 왜냐하면 host가 readonly가 아니죠!
     -   하지만, ReadOnly<T> 타입으로 불변 객체로 만들 수 있으니 걱정마세요!
@@ -226,17 +226,17 @@ processValue(42);
 
 #### ☑️ 사용 사례
 
-    ```tsx
-    interface Person {
-        name: string;
-        age: number;
-        address: string;
-    }
+```tsx
+interface Person {
+    name: string;
+    age: number;
+    address: string;
+}
 
-    type SubsetPerson = Pick<Person, "name" | "age">;
+type SubsetPerson = Pick<Person, "name" | "age">;
 
-    const person: SubsetPerson = { name: "Spartan", age: 30 };
-    ```
+const person: SubsetPerson = { name: "Spartan", age: 30 };
+```
 
     -   SubsetPerson은 Person이라는 인터페이스에서 `name`, `age` 속성만 선택해서 구성된 새로운 타입이에요!
 
