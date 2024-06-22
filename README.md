@@ -263,3 +263,73 @@ const person: SubsetPerson = { name: "Alice", age: 30 };
 ```
 
     -   여기서 SubsetPerson 타입은 Person 타입에서 `address` 속성만 제외한 새로운 타입입니다!
+
+## 6. 추상 클래스
+
+### 1) 추상 클래스란?
+
+#### ☑️ 추상 클래스의 정의
+
+    - 추상 클래스는 클래스와는 다르게 **인스턴스화를 할 수 없는 클래스**에요!
+
+#### ☑️ 추상 클래스가 있는 이유
+
+    - 추상 클래스의 목적은 **상속을 통해 자식 클래스에서 메서드를 제각각 구현**하도록 강제를 하는 용도입니다!
+    - 물론, 추상 클래스도 최소한의 기본 메서드는 정의를 할 수 있습니다.
+    - 하지만, 골자는 **핵심 기능의 구현은 전부 자식 클래스에게 위임을 하는 것**이에요!
+
+#### ☑️ 추상 클래스 사용 방법
+
+    - 추상 클래스 및 추상 함수는 `abstract` 키워드를 사용하여 정의합니다.
+    - 추상 클래스는 **1개 이상의 추상 함수**가 있는 것이 일반적입니다.
+
+#### ☑️ 사용 예시
+
+```tsx
+abstract class Shape {
+    abstract getArea(): number; // 추상 함수 정의!!!
+
+    printArea() {
+        console.log(`도형 넓이: ${this.getArea()}`);
+    }
+}
+
+class Circle extends Shape {
+    radius: number;
+
+    constructor(radius: number) {
+        super();
+        this.radius = radius;
+    }
+
+    getArea(): number {
+        // 원의 넓이를 구하는 공식은 파이 X 반지름 X 반지름
+        return Math.PI * this.radius * this.radius;
+    }
+}
+
+class Rectangle extends Shape {
+    width: number;
+    height: number;
+
+    constructor(width: number, height: number) {
+        super();
+        this.width = width;
+        this.height = height;
+    }
+
+    getArea(): number {
+        // 사각형의 넓이를 구하는 공식은 가로 X 세로
+        return this.width * this.height;
+    }
+}
+
+const circle = new Circle(5);
+circle.printArea();
+
+const rectangle = new Rectangle(4, 6);
+rectangle.printArea();
+```
+
+    - Shape 클래스의 `abstract getArea(): number;` 를 주목해주세요. 이 코드가 바로 추상 함수입니다.
+    - 이 추상 클래스를 상속 받은 자식 클래스들은 반드시 getArea 함수를 구현해야 합니다!
